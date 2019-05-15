@@ -1,0 +1,32 @@
+# base image
+FROM python:3.6 as build-deps
+
+RUN apt-get update && apt-get install make
+
+# set working directory
+RUN mkdir /app
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY docs/requirements.txt docs/
+
+RUN pip install --no-cache-dir -r docs/requirements.txt
+
+COPY . .
+
+RUN sphinx-apidoc -o ./docs/docs/_module ./app
+
+WORKDIR docs
+
+RUN make html
+
+FROM nginx:1.15-alpine
+
+COPY docs/nginx.conf /etc/nginx/conf.d
+COPY --from=build-deps /app/build/html/ /usr/share/nginx/html
+EXPOSE 5555
+
+CMD ["nginx", "-g", "daemon off;"]

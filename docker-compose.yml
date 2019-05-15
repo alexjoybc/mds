@@ -78,6 +78,20 @@ services:
       - redis
       - nris_backend
       - document_manager_backend
+      - sphinx
+    networks:
+      - mds
+
+  ###################### Backend Documentation #######################
+
+  sphinx:
+    restart: always
+    image: sphinx-flask-doc
+    build:
+      context: python-backend
+      dockerfile: Dockerfile.document
+    ports:
+      - 5555:5555
     networks:
       - mds
 
