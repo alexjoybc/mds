@@ -1,5 +1,5 @@
 
-name: Label PRs based on files changed
+name: PR Labeller
 on: [pull_request]
 
 jobs:

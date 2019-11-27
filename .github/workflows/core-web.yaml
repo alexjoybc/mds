@@ -1,0 +1,19 @@
+name: Core Web Unit Tests
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '10'
+    - name: Install dependencies
+      run: npm run ci
+      working-directory: services/core-web
+    - name: Run tests
+      run: npm run ci-test
+      working-directory: services/core-web
