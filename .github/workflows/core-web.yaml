@@ -12,7 +12,7 @@ jobs:
       with:
         node-version: '10'
     - name: Install dependencies
-      run: npm run ci
+      run: npm ci
       working-directory: services/core-web
     - name: Run tests
       run: npm run ci-test
