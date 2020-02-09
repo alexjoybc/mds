@@ -112,6 +112,15 @@
       "required": true
     },
     {
+      "name": "OBJECT_STORE_ENABLED",
+      "value": "1"
+    },
+    {
+      "name": "OBJECT_STORE_CONFIG_NAME",
+      "required": false,
+      "value": "template.mds-object-store-secret"
+    },
+    {
       "name": "DOCUMENT_CAPACITY",
       "required": true
     },
@@ -358,6 +367,46 @@
                   {
                     "name": "ENVIRONMENT_NAME",
                     "value": "${ENVIRONMENT_NAME}"
+                  },
+                  {
+                    "name": "OBJECT_STORE_ENABLED",
+                    "value": "${OBJECT_STORE_ENABLED}"
+                  },
+                  {
+                    "name": "OBJECT_STORE_HOST",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${OBJECT_STORE_CONFIG_NAME}",
+                        "key": "host"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OBJECT_STORE_ACCESS_KEY_ID",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${OBJECT_STORE_CONFIG_NAME}",
+                        "key": "access-key-id"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OBJECT_STORE_ACCESS_KEY",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${OBJECT_STORE_CONFIG_NAME}",
+                        "key": "access-key"
+                      }
+                    }
+                  },
+                  {
+                    "name": "OBJECT_STORE_BUCKET",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${OBJECT_STORE_CONFIG_NAME}",
+                        "key": "bucket"
+                      }
+                    }
                   }
                 ],
                 "resources": {

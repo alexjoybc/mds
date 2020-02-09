@@ -25,8 +25,7 @@ class ObjectStoreStorageService():
         """
         contents = []
 
-        for item in self._client.list_objects(
-                Bucket=Config.S3_BUCKET)['Contents']:
+        for item in self._client.list_objects(Bucket=Config.S3_BUCKET)['Contents']:
             contents.append(item)
 
         return contents
@@ -36,8 +35,7 @@ class ObjectStoreStorageService():
         Function to upload a file to an S3 bucket
         """
         object_name = file_name
-        response = self._client.upload_file(file_name, Config.S3_BUCKET,
-                                            object_name)
+        response = self._client.upload_file(file_name, Config.S3_BUCKET, object_name)
 
         return response
 
@@ -45,16 +43,12 @@ class ObjectStoreStorageService():
         """
         Function to download a given file from an S3 bucket
         """
-        # https://stackoverflow.com/questions/36274868/saving-an-image-to-bytes-and-uploading-to-boto3-returning-content-md5-mismatch
-        # https://stackoverflow.com/questions/44185486/generate-and-stream-compressed-file-with-flask
 
         buffer = io.BytesIO()
         self._client.download_fileobj(Config.S3_BUCKET, path, buffer)
 
         buffer.seek(0)
-        return send_file(buffer,
-                         attachment_filename=display_name,
-                         as_attachment=as_attachment)
+        return send_file(buffer, attachment_filename=display_name, as_attachment=as_attachment)
 
     def check_file(self, path):
         """
