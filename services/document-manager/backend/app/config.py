@@ -47,6 +47,13 @@ class Config(object):
     UPLOADED_DOCUMENT_DEST = os.environ.get('UPLOADED_DOCUMENT_DEST', '/app/document_uploads')
     MAX_CONTENT_LENGTH = 400 * 1024 * 1024
 
+    # Document hosting settings
+    OBJECT_STORE_ENABLED = os.environ.get('OBJECT_STORE_ENABLED', 0)
+    OBJECT_STORE_HOST = os.environ.get('OBJECT_STORE_HOST', '')
+    OBJECT_STORE_ACCESS_KEY_ID = os.environ.get('OBJECT_STORE_ACCESS_KEY_ID', '')
+    OBJECT_STORE_ACCESS_KEY = os.environ.get('OBJECT_STORE_ACCESS_KEY', '')
+    OBJECT_STORE_BUCKET = os.environ.get('OBJECT_STORE_BUCKET', '')
+
     def JWT_ROLE_CALLBACK(jwt_dict):
         return (jwt_dict['realm_access']['roles'])
 
