@@ -8,7 +8,7 @@ import factory.fuzzy
 
 from app.extensions import db
 
-from app.docman.models.document import Document
+from app.models.document import Document
 
 GUID = factory.LazyFunction(uuid.uuid4)
 TODAY = factory.LazyFunction(datetime.now)
@@ -37,10 +37,10 @@ class DocumentFactory(BaseFactory):
         path_root = ''
 
     document_guid = GUID
-    full_storage_path = factory.LazyAttribute(lambda o: path.join(o.path_root, 'mine_no/category', o
-                                                                  .file_display_name))
+    full_storage_path = factory.LazyAttribute(
+        lambda o: path.join(o.path_root, 'mine_no/category', o.file_display_name))
     upload_started_date = TODAY
     upload_completed_date = TODAY
     file_display_name = factory.Faker('file_name')
-    path_display_name = factory.LazyAttribute(lambda o: path.join(o.path_root, 'mine_name/category',
-                                                                  o.file_display_name))
+    path_display_name = factory.LazyAttribute(
+        lambda o: path.join(o.path_root, 'mine_name/category', o.file_display_name))

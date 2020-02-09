@@ -6,18 +6,20 @@ from werkzeug.exceptions import NotFound, InternalServerError, BadRequest
 from app.api.constants import TIMEOUT_5_MINUTES
 from app.extensions import api, cache
 from app.api.utils.access_decorators import requires_role_view_all
-from app.api.utils.resources_mixins import UserMixin 
+from app.api.utils.resources_mixins import UserMixin
 
 from app.api.services.nris_download_service import NRISDownloadService
 
 DOWNLOAD_TOKEN_MODEL = api.model('DownloadToken', {'token_guid': fields.String})
 
+
 def DOWNLOAD_TOKEN(token_guid):
     return f'compliance-document:download-token:{token_guid}'
 
 
-class ComplianceDocumentTokenResource(Resource, UserMixin ):
-    @api.doc(description='Issues a one-time token for access to a document without auth headers.',
+class ComplianceDocumentTokenResource(Resource, UserMixin):
+    @api.doc(
+        description='Issues a one-time token for access to a document without auth headers.',
         params={'file_name': 'The file name for the download being requested.'})
     @api.marshal_with(DOWNLOAD_TOKEN_MODEL, code=200)
     @requires_role_view_all
@@ -35,7 +37,7 @@ class ComplianceDocumentTokenResource(Resource, UserMixin ):
         return {'token_guid': token_guid}
 
 
-class ComplianceDocumentResource(Resource, UserMixin ):
+class ComplianceDocumentResource(Resource, UserMixin):
     @api.doc(
         description='Fetch an compliance document by id',
         params={'token': 'A one-time token issued for downloading the file.'})

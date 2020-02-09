@@ -1,6 +1,6 @@
 import pytest
 from app.utils.access_decorators import VIEW_ALL, MINE_EDIT, MINE_ADMIN, MINESPACE_PROPONENT, EDIT_PARTY, EDIT_PERMIT, EDIT_DO, EDIT_VARIANCE
-from app.docman.resources.document import DocumentResource, DocumentListResource
+from app.resources.document import DocumentResource, DocumentListResource
 
 
 @pytest.mark.parametrize(
