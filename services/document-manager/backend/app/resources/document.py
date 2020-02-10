@@ -30,54 +30,14 @@ class DocumentListResource(Resource):
     @requires_any_of(
         [MINE_EDIT, EDIT_PARTY, EDIT_PERMIT, EDIT_DO, EDIT_VARIANCE, MINESPACE_PROPONENT])
     def post(self):
+
+        # TODO: Implement non-tus upload
         if request.headers.get('Tus-Resumable') is None:
             raise BadRequest('Received file upload for unsupported file transfer protocol')
 
-        file_size = request.headers.get('Upload-Length')
-        max_file_size = current_app.config["MAX_CONTENT_LENGTH"]
-        if not file_size:
-            raise BadRequest('Received file upload of unspecified size')
-        file_size = int(file_size)
-        if file_size > max_file_size:
-            raise RequestEntityTooLarge(
-                f'The maximum file upload size is {max_file_size/1024/1024}MB.')
+        document_guid = DocumentService.begin_tus_upload(request, )
 
-        data = self.parser.parse_args()
-        filename = data.get('filename')
-        if not filename:
-            raise BadRequest('File name cannot be empty')
-        if filename.endswith(FORBIDDEN_FILETYPES):
-            raise BadRequest('File type is forbidden')
-
-        document_guid = str(uuid.uuid4())
-        base_folder = current_app.config['UPLOADED_DOCUMENT_DEST']
-        folder = data.get('folder')
-        folder = os.path.join(base_folder, folder)
-        file_path = os.path.join(folder, document_guid)
-        pretty_folder = data.get('pretty_folder')
-        pretty_path = os.path.join(base_folder, pretty_folder, filename)
-
-        try:
-            if not os.path.exists(folder):
-                os.makedirs(folder)
-            with open(file_path, "wb") as f:
-                f.seek(file_size - 1)
-                f.write(b"\0")
-        except IOError as e:
-            raise InternalServerError('Unable to create file')
-
-        cache.set(FILE_UPLOAD_SIZE(document_guid), file_size, TIMEOUT_24_HOURS)
-        cache.set(FILE_UPLOAD_OFFSET(document_guid), 0, TIMEOUT_24_HOURS)
-        cache.set(FILE_UPLOAD_PATH(document_guid), file_path, TIMEOUT_24_HOURS)
-
-        document_info = Document(
-            document_guid=document_guid,
-            full_storage_path=file_path,
-            upload_started_date=datetime.utcnow(),
-            file_display_name=filename,
-            path_display_name=pretty_path,
-        )
-        document_info.save()
+        # END Document Save
 
         response = make_response(jsonify(document_manager_guid=document_guid), 201)
         response.headers['Tus-Resumable'] = TUS_API_VERSION
@@ -93,25 +53,22 @@ class DocumentListResource(Resource):
     def get(self):
         token_guid = request.args.get('token', '')
         attachment = request.args.get('as_attachment', None)
-        doc_guid = cache.get(DOWNLOAD_TOKEN(token_guid))
+        document_guid = cache.get(DOWNLOAD_TOKEN(token_guid))
         cache.delete(DOWNLOAD_TOKEN(token_guid))
 
-        if not doc_guid:
+        if not document_guid:
             raise BadRequest('Valid token required for download')
 
-        doc = Document.query.filter_by(document_guid=doc_guid).first()
+        doc = Document.query.filter_by(document_guid=document_guid).first()
         if not doc:
             raise NotFound('Could not find the document corresponding to the token')
         current_app.logger.debug(attachment)
         if attachment is not None:
-            attach_style = True if attachment == 'true' else False
+            as_attachment = True if attachment == 'true' else False
         else:
-            attach_style = '.pdf' not in doc.file_display_name.lower()
+            as_attachment = '.pdf' not in doc.file_display_name.lower()
 
-        return send_file(
-            filename_or_fp=doc.full_storage_path,
-            attachment_filename=doc.file_display_name,
-            as_attachment=attach_style)
+        return DocumentService.download_file(document_guid, as_attachment)
 
 
 @api.route(f'/documents/<string:document_guid>')
@@ -132,6 +89,12 @@ class DocumentResource(Resource):
     @requires_any_of(
         [MINE_EDIT, EDIT_PARTY, EDIT_PERMIT, EDIT_DO, EDIT_VARIANCE, MINESPACE_PROPONENT])
     def patch(self, document_guid):
+        """ 
+        Used for tus resumable file uploads, requires the initial uploaded file guid.
+        """
+
+        DocumentService.tus_upload_resume()
+
         file_path = cache.get(FILE_UPLOAD_PATH(document_guid))
         if file_path is None or not os.path.lexists(file_path):
             raise NotFound('PATCH sent for a upload that does not exist')
@@ -187,8 +150,11 @@ class DocumentResource(Resource):
             raise BadRequest('Must specify document GUID in HEAD')
 
         file_path = cache.get(FILE_UPLOAD_PATH(document_guid))
+
+        # Begin file exists
         if file_path is None or not os.path.lexists(file_path):
             raise NotFound('File does not exist')
+        # End file exists
 
         response = make_response("", 200)
         response.headers['Tus-Resumable'] = TUS_API_VERSION
