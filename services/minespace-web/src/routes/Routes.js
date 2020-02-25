@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import { Result, Button, Icon, Typography } from "antd";
 import AuthenticationGuard from "@/HOC/AuthenticationGuard";
 import * as routes from "@/constants/routes";
@@ -10,7 +10,8 @@ const Routes = () => (
   <Switch>
     {/* PUBLIC ROUTES */}
     <Route exact path={routes.HOME.route} component={routes.HOME.component} />
-    <Route exact path={routes.RETURN_PAGE.route} component={routes.RETURN_PAGE.component} /> */}
+    <Route exact path={routes.RETURN_PAGE.route} component={routes.RETURN_PAGE.component} />
+    <Route exact path={routes.MOCKUP.route} component={routes.MOCKUP.component} />
     {/* PRIVATE ROUTES */}
     <Route
       exact
