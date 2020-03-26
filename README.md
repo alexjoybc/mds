@@ -16,7 +16,7 @@ The product is anticipated to include:
 Please read the [How to Contribute guide](CONTRIBUTING.md).
 
 ## How to Develop
-Please read the [How to develop](USAGE.md).
+Please read the [How to develop](USAGE.md). 
 
 ## License
 Code released under the [Apache License, Version 2.0](LICENSE.md).
