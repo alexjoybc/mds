@@ -3,7 +3,7 @@ CREATE TABLE permit_condition (
   now_application_id                    integer                     NOT NULL,
   condition_section                     varchar                     NOT NULL,
   condition_text                        varchar                     NOT NULL, 
-  condition_start_date                  date                        DEFAULT now() NOT null,
+  condition_start_date                  date                        NOT null,
   library_condition_id                  integer                     ,
   active_ind                            boolean                     DEFAULT true NOT NULL,
   create_user                           varchar                     NOT NULL,
