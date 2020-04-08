@@ -1,3 +1,5 @@
+from .permit_condition import PermitCondition
+
 from .activity_detail import *
 from .activity_summary import *
 from .notice_of_work_view import NoticeOfWorkView
@@ -9,6 +11,7 @@ from .now_application_permit_type import NOWApplicationPermitType
 from .now_application_document_type import NOWApplicationDocumentType
 from .now_application_review import NOWApplicationReview, NOWApplicationReviewDocumentXref
 from .now_application_review_type import NOWApplicationReviewType
+
 
 from .blasting_operation import BlastingOperation
 from .unit_type import UnitType

@@ -11,6 +11,6 @@ CREATE TABLE permit_condition (
   update_user                           varchar                     NOT NULL,
   update_timestamp                      timestamp with time zone    DEFAULT now() NOT null,
 
-  FOREIGN KEY (now_application_id) REFERENCES now_application(now_application_id) DEFERRABLE INITIALLY DEFERRED,
+  FOREIGN KEY (now_application_id) REFERENCES now_application(now_application_id) DEFERRABLE INITIALLY DEFERRED
 );
 ALTER TABLE permit_condition OWNER TO mds;
