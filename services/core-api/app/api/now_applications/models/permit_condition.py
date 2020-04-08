@@ -13,7 +13,7 @@ class PermitCondition(Base, AuditMixin):
     permit_condition_id = db.Column(db.Integer, primary_key=True)
     now_application_id = db.Column(
         db.Integer, db.ForeignKey('now_application.now_application_id'), nullable=False)
-    now_application = db.relationship('NOWApplication', backref='permit_conditions')
+    now_application = db.relationship('NOWApplication')
 
     condition_section = db.Column(db.String, nullable=False)
     condition_text = db.Column(db.String, nullable=False)
