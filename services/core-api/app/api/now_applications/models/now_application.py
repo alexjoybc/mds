@@ -122,6 +122,9 @@ class NOWApplication(Base, AuditMixin):
     # Contacts
     contacts = db.relationship('NOWPartyAppointment', lazy='selectin')
 
+    #Permit Conditions
+    permit_conditions = db.relationship('PermitConditions', lazy='selectin')
+
     def __repr__(self):
         return '<NOWApplication %r>' % self.now_application_guid
 
