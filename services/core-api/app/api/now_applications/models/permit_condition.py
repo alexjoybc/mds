@@ -17,7 +17,7 @@ class PermitCondition(Base, AuditMixin):
 
     condition_section = db.Column(db.String, nullable=False)
     condition_text = db.Column(db.String, nullable=False)
-    condition_start_date = db.Column(db.String, nullable=False)
+    condition_start_date = db.Column(db.Date, nullable=False)
     #library_condition_id = db.Column(db.Integer, db.ForeignKey())
     active_ind = db.Column(db.Boolean, nullable=False, server_default=FetchedValue())
 
