@@ -23,7 +23,7 @@ export class MineRiskInfo extends Component {
     return (
       <div className="tab__content">
         <div>
-          <h2>Risk</h2>
+          <h2>Risk Rating</h2>
           <Divider />
           Content!
         </div>

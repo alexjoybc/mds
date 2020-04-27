@@ -21,6 +21,7 @@ export const MINE_COMPLIANCE_SUMMARY = (mine_guid) => `/mines/${mine_guid}/compl
 export const MINE_TSF = (mine_guid) => `/mines/${mine_guid}/tailings`;
 export const DISTURBANCE_CODES = "/mines/disturbance-codes";
 export const COMMODITY_CODES = "/mines/commodity-codes";
+export const RISK_RATING_SURVEY_DEFINITIONS = "/mines/risk-rating-survey-definitions";
 export const EDIT_TSF_REPORT = "";
 export const MINE_DOCUMENTS = (mine_guid) => `/mines/${mine_guid}/documents`;
 export const MINE_TSF_REQUIRED_DOCUMENTS = "/required-documents?category=TSF";

@@ -13,6 +13,7 @@ from ...response_models import STATIC_CONTENT_MODEL
 
 from app.api.mines.mine.models.mine_disturbance_code import MineDisturbanceCode
 from app.api.mines.mine.models.mine_commodity_code import MineCommodityCode
+from app.api.mines.risk_rating.models.mine_risk_rating_survey_definition import MineRiskRatingSurveyDefinition
 from app.api.mines.status.models.mine_status_xref import MineStatusXref
 from app.api.mines.region.models.region import MineRegionCode
 from app.api.mines.mine.models.mine_tenure_type_code import MineTenureTypeCode
@@ -54,7 +55,8 @@ MODELS_GET_ACTIVE = [
     MineReportDefinition, MineReportCategory, MineReportSubmissionStatusCode, ActivityType,
     UnitType, NOWApplicationType, NOWApplicationStatus, NOWApplicationDocumentType,
     UndergroundExplorationType, NOWApplicationProgressStatus, NOWApplicationPermitType,
-    MinePartyAppointmentType, NOWApplicationReviewType, BondType, BondStatus, BondDocumentType, ExemptionFeeStatus
+    MinePartyAppointmentType, NOWApplicationReviewType, BondType, BondStatus, BondDocumentType,
+    ExemptionFeeStatus, MineRiskRatingSurveyDefinition
 ]
 
 

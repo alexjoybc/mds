@@ -38,6 +38,7 @@ export const {
   getBondTypeOptions,
   getBondDocumentTypeOptions,
   getExemptionFeeStatusOptions,
+  getMineRiskRatingSurveyDefinitionOptions,
 } = staticContentReducer;
 
 // removes all expired compliance codes from the array
@@ -490,4 +491,16 @@ export const getExemptionFeeSatusDropDownOptions = createSelector(
 export const getExemptionFeeStatusOptionsHash = createSelector(
   [getExemptionFeeSatusDropDownOptions],
   createLabelHash
+);
+
+export const getMineRiskRatingSurveyDefinitionOptionsHash = createSelector(
+  [getMineRiskRatingSurveyDefinitionOptions],
+  (options) =>
+    options.reduce(
+      (map, definition) => ({
+        [definition.mine_risk_rating_survey_definition_id]: definition,
+        ...map,
+      }),
+      {}
+    )
 );

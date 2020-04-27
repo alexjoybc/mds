@@ -447,3 +447,21 @@ MINE_COMPLIANCE_RESPONSE_MODEL = api.model(
             api.model('NUM_INSPECTIONS', {'num_inspections': fields.Integer})),
         'orders': fields.List(fields.Nested(ORDER_MODEL)),
     })
+
+MINE_RISK_RATING_SURVEY_DEFINITION_MODEL = api.model(
+    'MineRiskRatingSurveyDefinition', {
+        'mine_risk_rating_survey_definition_id': fields.Integer,
+        'survey_definition_json': fields.String,
+        'is_active_survey': fields.Boolean,
+        'create_timestamp': fields.DateTime
+    })
+
+MINE_RISK_RATING_SURVEY_RESPONSE_MODEL = api.model(
+    'MineRiskRatingSurveyResponse', {
+        'mine_risk_rating_survey_response_id': fields.Integer,
+        'mine_risk_rating_survey_definition_id': fields.Integer,
+        'mine_guid': fields.String,
+        'survey_response_json': fields.String,
+        'username': fields.String,
+        'create_timestamp': fields.DateTime
+    })
