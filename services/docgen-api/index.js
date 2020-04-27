@@ -20,6 +20,12 @@ const render = util.promisify(carbone.render);
 
 _.forEach(carbone.formatters, (formatter) => (formatter.$isDefault = true));
 
+function injectXML(d) {
+  return d;
+}
+// this formatter is separately to inject code
+injectXML.canInjectXML = true;
+
 app.post("/template/:uid/render", async (req, res) => {
   console.log("TEMPLATE RENDER");
   console.log(req.body);
@@ -39,10 +45,7 @@ app.post("/template/:uid/render", async (req, res) => {
   templateFileName = files[0];
   templateFilePath = targetPath + "/" + templateFileName;
 
-  const originalNameWOExt = templateFileName
-    .split(`.`)
-    .slice(0, -1)
-    .join(`.`);
+  const originalNameWOExt = templateFileName.split(`.`).slice(0, -1).join(`.`);
   const originalFormat = templateFileName.split(`.`).reverse()[0];
 
   let data = req.body.data;
@@ -68,10 +71,11 @@ app.post("/template/:uid/render", async (req, res) => {
 
   try {
     formatters = telejson.parse(req.body.formatters);
-  } catch (e) { }
+  } catch (e) {}
 
-  carbone.formatters = _.filter(carbone.formatters, (formatter) => formatter.$isDefault === true);
+  // carbone.formatters = _.filter(carbone.formatters, (formatter) => formatter.$isDefault === true);
 
+  carbone.formatters.injectXML = injectXML;
   carbone.addFormatters(formatters);
 
   let report = null;
