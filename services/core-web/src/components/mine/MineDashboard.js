@@ -294,13 +294,15 @@ export class MineDashboard extends Component {
                       <img src={SUBSCRIBE} alt="SUBSCRIBE" className="padding-small" />
                     </Tooltip>
                   )}
-                  {mine.has_minespace_users && (
+                  {mine.minespace_user_count > 0 && (
                     <Tooltip
-                      title="This mine is registered on MineSpace"
+                      title={`This mine has ${mine.minespace_user_count} MineSpace user${
+                        mine.minespace_user_count > 1 ? "s" : ""
+                      }`}
                       placement="top"
                       mouseEnterDelay={1}
                     >
-                      <img src={MINESPACE_ICON} alt="mineSpace" width="22" height="22" />
+                      <img src={MINESPACE_ICON} alt="MineSpace Icon" width="22" height="22" />
                     </Tooltip>
                   )}
                 </div>

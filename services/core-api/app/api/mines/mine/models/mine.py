@@ -121,10 +121,9 @@ class Mine(AuditMixin, Base):
         return p_numbers
 
     @hybrid_property
-    def has_minespace_users(self):
-        count = db.session.query(MinespaceUserMine).filter(
+    def minespace_user_count(self):
+        return db.session.query(MinespaceUserMine).filter(
             MinespaceUserMine.mine_guid == self.mine_guid).count()
-        return count > 0
 
     @classmethod
     def find_by_mine_guid(cls, _id):
