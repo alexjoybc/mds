@@ -42,6 +42,9 @@ export class MineNavigation extends Component {
                 Contacts
               </Link>
             </Menu.Item>
+            <Menu.Item key="risk">
+              <Link to={routes.MINE_RISK.dynamicRoute(this.props.mine.mine_guid)}>Risk Rating</Link>
+            </Menu.Item>
           </Menu>
         </SubMenu>
         <SubMenu

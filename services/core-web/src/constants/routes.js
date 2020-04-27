@@ -18,6 +18,7 @@ import SearchResults from "@/components/search/SearchResults";
 import CustomHomePage from "@/components/dashboard/customHomePage/CustomHomePage";
 import MineSummary from "@/components/mine/Summary/MineSummary";
 import MineContactInfo from "@/components/mine/ContactInfo/MineContactInfo";
+import MineRiskInfo from "@/components/mine/Risk/MineRiskInfo";
 import MinePermitInfo from "@/components/mine/Permit/MinePermitInfo";
 import MineSecurityInfo from "@/components/mine/Securities/MineSecurityInfo";
 import MineVariance from "@/components/mine/Variances/MineVariance";
@@ -114,6 +115,12 @@ export const MINE_GENERAL = {
   route: "/mine-dashboard/:id/mine-information/general",
   dynamicRoute: (id) => `/mine-dashboard/${id}/mine-information/general`,
   component: MineSummary,
+};
+
+export const MINE_RISK = {
+  route: "/mine-dashboard/:id/mine-information/risk-rating",
+  dynamicRoute: (id) => `/mine-dashboard/${id}/mine-information/risk-rating`,
+  component: MineRiskInfo,
 };
 
 export const MINE_PERMITS = {
