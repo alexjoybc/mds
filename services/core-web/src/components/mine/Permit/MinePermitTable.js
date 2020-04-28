@@ -159,7 +159,7 @@ const columns = [
               />
               Edit permit status
             </button>
-          </Menu.Item>{" "}
+          </Menu.Item>
           <div className="custom-menu-item" key="3">
             <button
               type="button"

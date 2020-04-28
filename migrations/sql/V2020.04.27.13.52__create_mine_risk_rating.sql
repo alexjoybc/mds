@@ -22,82 +22,47 @@ INSERT INTO mine_risk_rating_survey_definition (
     is_active_survey
     )
 VALUES
-    ('[
-    {
-      "id": "letter_dt",
-      "label": "Letter Date",
-      "type": "DATE",
-      "placeholder": null,
-      "required": true
-    },
-    {
-      "id": "mine_no",
-      "label": "Mine Number",
-      "type": "FIELD",
-      "placeholder": "Enter the mine number",
-      "required": true,
-      "relative-data-path": "mine.mine_no",
-      "read-only": true
-    },
-    {
-      "id": "proponent_address",
-      "label": "Proponent Address",
-      "type": "FIELD",
-      "placeholder": "Enter the propnent''s address",
-      "required": true
-    },
-    {
-      "id": "proponent_name",
-      "label": "Proponent Name",
-      "type": "FIELD",
-      "placeholder": "Enter the propnent''s name",
-      "required": false
-    },
-    {
-      "id": "emailed_to",
-      "label": "Emailed to",
-      "type": "FIELD",
-      "placeholder": "Enter the name of the email recipient",
-      "required": false
-    },
-    {
-      "id": "property",
-      "label": "Property",
-      "type": "FIELD",
-      "placeholder": "Enter the property",
-      "required": true,
-      "relative-data-path": "now_application.property_name",
-      "read-only": true
-    },
-    {
-      "id": "application_dt",
-      "label": "Application Date",
-      "type": "DATE",
-      "placeholder": null,
-      "required": true,
-      "relative-data-path": "now_application.submitted_date"
-    },
-    {
-      "id": "exploration_type",
-      "label": "Exploration Type",
-      "type": "FIELD",
-      "placeholder": "Enter the exploration type",
-      "required": true
-    },
-    {
-      "id": "bond_inc_amt",
-      "label": "Bond Amount",
-      "type": "FIELD",
-      "placeholder": "Enter the bond amount",
-      "required": true
-    },
-    {
-      "id": "inspector",
-      "label": "Inspector",
-      "type": "FIELD",
-      "placeholder": "Enter the inspector''s name",
-      "required": true,
-      "relative-data-path": "now_application.lead_inspector.name"
-    }
-  ]', true)
+    (
+'[
+  {
+    "id": "geo_q1",
+    "question": "What is the likelihood of any geotechnical incidents at this site?",
+    "type": "RANGE_10"
+  },
+  {
+    "id": "geo_q1",
+    "question": "How significant is the consequence of the largest potential geotechnical failure at this site?",
+    "type": "RANGE_10"
+  },
+  {
+    "id": "geo_q1",
+    "question": "What is the likelihood of any environmental incidents at this site?",
+    "type": "RANGE_10"
+  },
+  {
+    "id": "geo_q1",
+    "question": "How significant is the consequence of the largest environmental risks at this site?",
+    "type": "RANGE_10"
+  },
+  {
+    "id": "geo_q1",
+    "question": "What is the likelihood of any health and safety incidents at this site?",
+    "type": "RANGE_10"
+  },
+  {
+    "id": "geo_q1",
+    "question": "What is the likelihood of any geotechnical incidents at this site?",
+    "type": "RANGE_10"
+  },
+  {
+    "id": "geo_q1",
+    "question": "How significant is the consequence of the most potential health and safety incident at this site?",
+    "type": "RANGE_10"
+  },
+  {
+    "id": "geo_q1",
+    "question": "How has this mine performed in compliance in the past (1 being often non-compliant, 10 being continuously in compliance)?",
+    "type": "RANGE_10"
+  }
+]', true)
 ON CONFLICT DO NOTHING;

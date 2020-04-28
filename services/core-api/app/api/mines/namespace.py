@@ -19,7 +19,7 @@ from app.api.mines.permits.permit_amendment.resources.permit_amendment_document 
 from app.api.mines.permits.permit.resources.permit_document_upload import PermitDocumentUploadInitializationResource
 from app.api.mines.region.resources.region import MineRegionResource
 from app.api.mines.risk_rating.resources.mine_risk_rating_survey_definition import MineRiskRatingSurveyDefinitionResource
-from app.api.mines.risk_rating.resources.mine_risk_rating_survey_response import MineRiskRatingSurveyResponseResource
+from app.api.mines.risk_rating.resources.mine_risk_rating_survey_response import MineRiskRatingSurveyResponseResource, MineRiskRatingSurveyResponseListResource
 from app.api.mines.reports.resources.mine_report_document import MineReportDocumentListResource
 from app.api.mines.reports.resources.reports_resource import ReportsResource
 from app.api.mines.reports.resources.mine_reports import MineReportListResource, MineReportResource
@@ -48,8 +48,9 @@ api.add_resource(MineDisturbanceCodeResource, '/disturbance-codes')
 api.add_resource(MineCommodityCodeResource, '/commodity-codes')
 api.add_resource(MineStatusXrefListResource, '/status')
 api.add_resource(MineRegionResource, '/region')
-
 api.add_resource(MineRiskRatingSurveyDefinitionResource, '/risk-rating-survey-definitions')
+
+api.add_resource(MineRiskRatingSurveyResponseListResource, '/risk-rating-survey-responses')
 api.add_resource(MineRiskRatingSurveyResponseResource,
                  '/risk-rating-survey-responses/<string:mine_guid>')
 
