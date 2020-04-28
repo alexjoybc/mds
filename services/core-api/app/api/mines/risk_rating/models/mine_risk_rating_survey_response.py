@@ -13,7 +13,9 @@ class MineRiskRatingSurveyResponse(Base):
         db.ForeignKey('mine_risk_rating_survey_definition.mine_risk_rating_survey_definition_id'))
     mine_guid = db.Column(UUID(as_uuid=True), db.ForeignKey('mine.mine_guid'))
     survey_response_json = db.Column(db.String, nullable=False)
+    notes = db.Column(db.String, nullable=True)
     username = db.Column(db.String, nullable=False)
+    rating = db.Column(db.Numeric(5, 2), nullable=False)
     create_timestamp = db.Column(db.DateTime, nullable=False, server_default=FetchedValue())
 
     def __repr__(self):

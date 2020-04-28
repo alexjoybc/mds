@@ -462,6 +462,16 @@ MINE_RISK_RATING_SURVEY_RESPONSE_MODEL = api.model(
         'mine_risk_rating_survey_definition_id': fields.Integer,
         'mine_guid': fields.String,
         'survey_response_json': fields.String,
+        'notes': fields.String,
         'username': fields.String,
+        'rating': fields.Fixed(decimals=2),
         'create_timestamp': fields.DateTime
+    })
+
+MINE_RISK_RATING_SURVEY_RESPONSE_POST_MODEL = api.model(
+    'MineRiskRatingSurveyResponse', {
+        'mine_risk_rating_survey_definition_id': fields.Integer,
+        'mine_guid': fields.String,
+        'survey_response_json': fields.String,
+        'notes': fields.String
     })

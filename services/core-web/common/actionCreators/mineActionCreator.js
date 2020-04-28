@@ -265,3 +265,41 @@ export const fetchSubscribedMinesByUser = () => (dispatch) => {
     .catch(() => dispatch(error(reducerTypes.GET_SUBSCRIBED_MINES)))
     .finally(() => dispatch(hideLoading()));
 };
+
+export const fetchMineRiskRatingSurveyResponses = (mineGuid) => (dispatch) => {
+  dispatch(request(reducerTypes.GET_MINE_RISK_RATING_SURVEY_RESPONSES));
+  dispatch(showLoading());
+  return CustomAxios()
+    .get(
+      `${ENVIRONMENT.apiUrl}${API.MINE_RISK_RATING_SURVEY_RESPONSES_MINE(mineGuid)}`,
+      createRequestHeader()
+    )
+    .then((response) => {
+      dispatch(success(reducerTypes.GET_MINE_RISK_RATING_SURVEY_RESPONSES));
+      dispatch(mineActions.storeMineRiskRatingSurveyResponses(response.data));
+      return response;
+    })
+    .catch(() => dispatch(error(reducerTypes.GET_MINE_RISK_RATING_SURVEY_RESPONSES)))
+    .finally(() => dispatch(hideLoading()));
+};
+
+export const createMineRiskRatingSurveyResponse = (payload) => (dispatch) => {
+  dispatch(request(reducerTypes.CREATE_MINE_RISK_RATING_SURVEY_RESPONSE));
+  dispatch(showLoading("modal"));
+  return CustomAxios()
+    .post(
+      ENVIRONMENT.apiUrl + API.MINE_RISK_RATING_SURVEY_RESPONSES,
+      payload,
+      createRequestHeader()
+    )
+    .then((response) => {
+      notification.success({
+        message: "Successfully completed the mine risk rating survey.",
+        duration: 10,
+      });
+      dispatch(success(reducerTypes.CREATE_MINE_RISK_RATING_SURVEY_RESPONSE));
+      return response;
+    })
+    .catch(() => dispatch(error(reducerTypes.CREATE_MINE_RISK_RATING_SURVEY_RESPONSE)))
+    .finally(() => dispatch(hideLoading("modal")));
+};

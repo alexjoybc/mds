@@ -35,3 +35,8 @@ export const storeCurrentUserMineVerifiedStatuses = (payload) => ({
   type: ActionTypes.STORE_CURRENT_USER_MINE_VERIFIED_STATUS,
   payload,
 });
+
+export const storeMineRiskRatingSurveyResponses = (payload) => ({
+  type: ActionTypes.STORE_MINE_RISK_RATING_SURVEY_RESPONSES,
+  payload,
+});

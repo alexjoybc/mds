@@ -26,6 +26,7 @@ const FIELDS_COMPONENT = {
   RADIO: renderConfig.RADIO,
   GROUPED_SELECT: renderConfig.GROUPED_SELECT,
   MINE_SELECT: renderConfig.MINE_SELECT,
+  SLIDER_1_TO_10: renderConfig.SLIDER_1_TO_10,
 };
 
 const GenerateDocumentFormField = (props) => (
@@ -36,6 +37,7 @@ const GenerateDocumentFormField = (props) => (
     placeholder={props.field.placeholder}
     component={FIELDS_COMPONENT[props.field.type]}
     validate={props.field.required ? [required] : null}
+    disabled={props.field.disabled}
     {...props}
   />
 );
@@ -65,6 +67,7 @@ const FIELDS = {
   RADIO: GenerateDocumentFormField,
   GROUPED_SELECT: GenerateDocumentFormField,
   MINE_SELECT: GenerateDocumentFormField,
+  SLIDER_1_TO_10: GenerateDocumentFormField,
 };
 
 GenerateDocumentFormField.propTypes = propTypes;

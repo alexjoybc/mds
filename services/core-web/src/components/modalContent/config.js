@@ -25,6 +25,7 @@ import GenerateDocumentModal from "./GenerateDocumentModal";
 import AddBondModal from "./AddBondModal";
 import ViewBondModal from "./ViewBondModal";
 import AddReclamationInvoiceModal from "./AddReclamationInvoiceModal";
+import MineRiskRatingSurveyModal from "./MineRiskRatingSurveyModal";
 
 export const modalConfig = {
   MINE_RECORD: MineRecordModal,
@@ -54,6 +55,7 @@ export const modalConfig = {
   ADD_BOND_MODAL: AddBondModal,
   VIEW_BOND_MODAL: ViewBondModal,
   ADD_RECLAMATION_INVOICE_MODAL: AddReclamationInvoiceModal,
+  MINE_RISK_RATING_SURVEY: MineRiskRatingSurveyModal,
 };
 
 export default modalConfig;

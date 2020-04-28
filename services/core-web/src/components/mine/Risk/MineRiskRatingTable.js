@@ -13,26 +13,29 @@ const propTypes = {
   isLoaded: PropTypes.bool.isRequired,
 };
 
-const defaultProps = {};
+const defaultProps = { mineRiskRatingSurveyResponses: [] };
 
 const columns = [
   {
-    title: "Date Completed",
-    dataIndex: "create_timestamp",
-    key: "create_timestamp",
-    render: (text) => <div title="Date Completed">{text}</div>,
+    title: "Rating",
+    dataIndex: "rating",
+    key: "rating",
+    render: (text) => <div title="Rating">{text}</div>,
+    sorter: (a, b) => a.rating.localeCompare(b.rating),
   },
   {
     title: "Username",
     dataIndex: "username",
     key: "username",
     render: (text) => <div title="Username">{text}</div>,
+    sorter: (a, b) => a.username.localeCompare(b.username),
   },
   {
-    title: "Rating",
-    dataIndex: "rating",
-    key: "rating",
-    render: (text) => <div title="Rating">{text}</div>,
+    title: "Date Completed",
+    dataIndex: "create_timestamp",
+    key: "create_timestamp",
+    render: (text) => <div title="Date Completed">{text}</div>,
+    sorter: (a, b) => a.create_timestamp.localeCompare(b.create_timestamp),
   },
   {
     key: "operations",
@@ -42,7 +45,12 @@ const columns = [
         type="primary"
         size="small"
         ghost
-        onClick={(event) => record.openViewMineIncidentModal(event, record.incident)}
+        onClick={(event) =>
+          record.openViewMineRiskRatingSurveyResponseModal(
+            event,
+            record.mineRiskRatingSurveyResponse
+          )
+        }
       >
         <Icon type="eye" className="icon-lg icon-svg-filter" />
       </Button>
@@ -58,6 +66,7 @@ const transformRowData = (response, openViewMineRiskRatingSurveyResponseModal) =
     username: response.username || Strings.EMPTY_FIELD,
     rating: response.rating || Strings.EMPTY_FIELD,
     openViewMineRiskRatingSurveyResponseModal,
+    mineRiskRatingSurveyResponse: response,
   };
 };
 
@@ -76,13 +85,13 @@ export const MineRiskRatingTable = (props) => {
         rowClassName: "table-row-align-middle pointer fade-in",
         align: "left",
         pagination: false,
-        locale: { emptyText: <NullScreen type="permit" /> },
+        locale: { emptyText: <NullScreen type="risk-rating" /> },
       }}
     />
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = () => ({});
 
 MineRiskRatingTable.propTypes = propTypes;
 MineRiskRatingTable.defaultProps = defaultProps;

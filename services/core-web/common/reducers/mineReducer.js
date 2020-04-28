@@ -16,6 +16,7 @@ const initialState = {
   mineBasicInfoList: [],
   mineDocuments: [],
   subscribedMines: [],
+  mineRiskRatingSurveyResponses: [],
 };
 
 export const mineReducer = (state = initialState, action) => {
@@ -63,6 +64,11 @@ export const mineReducer = (state = initialState, action) => {
           (status) => status.healthy_ind !== true
         ),
       };
+    case actionTypes.STORE_MINE_RISK_RATING_SURVEY_RESPONSES:
+      return {
+        ...state,
+        mineRiskRatingSurveyResponses: action.payload,
+      };
     default:
       return state;
   }
@@ -83,5 +89,7 @@ export const getSubscribedMines = (state) => state[MINES].subscribedMines;
 export const getCurrentUserVerifiedMines = (state) => state[MINES].currentUserVerifiedMines;
 export const getCurrentUserUnverifiedMines = (state) =>
   state[MINES].currentUserUnverifiedMinesMines;
+export const getMineRiskRatingSurveyResponses = (state) =>
+  state[MINES].mineRiskRatingSurveyResponses;
 
 export default mineReducerObject;

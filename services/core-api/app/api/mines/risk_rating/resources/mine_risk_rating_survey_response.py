@@ -10,7 +10,7 @@ from app.api.utils.resources_mixins import UserMixin
 from app.api.utils.include.user_info import User
 from app.api.mines.risk_rating.models.mine_risk_rating_survey_response import MineRiskRatingSurveyResponse
 from app.api.mines.risk_rating.models.mine_risk_rating_survey_response import MineRiskRatingSurveyResponse
-from app.api.mines.response_models import MINE_RISK_RATING_SURVEY_RESPONSE_MODEL
+from app.api.mines.response_models import MINE_RISK_RATING_SURVEY_RESPONSE_MODEL, MINE_RISK_RATING_SURVEY_RESPONSE_POST_MODEL
 
 
 class MineRiskRatingSurveyResponseListResource(Resource, UserMixin):
@@ -22,7 +22,7 @@ class MineRiskRatingSurveyResponseListResource(Resource, UserMixin):
 
     @api.doc(description='Create a risk rating survey response')
     # @requires_role_mine_edit
-    @api.expect(MINE_RISK_RATING_SURVEY_RESPONSE_MODEL)
+    @api.expect(MINE_RISK_RATING_SURVEY_RESPONSE_POST_MODEL)
     @api.marshal_with(MINE_RISK_RATING_SURVEY_RESPONSE_MODEL, code=201)
     def post(self):
         try:

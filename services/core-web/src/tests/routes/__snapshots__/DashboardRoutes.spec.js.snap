@@ -134,7 +134,7 @@ exports[`DashboardRoutes  renders properly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(MineRiskInfo)",
+        "displayName": "Connect(MineRiskRatingInfo)",
         "type": [Function],
       }
     }

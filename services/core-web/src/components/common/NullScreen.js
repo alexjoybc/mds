@@ -35,6 +35,7 @@ const propTypes = {
     "now-contacts",
     "add-now-activity",
     "securities",
+    "risk-rating",
   ]),
   message: PropTypes.string,
 };
@@ -195,6 +196,12 @@ const NullScreen = (props) => (
       <div>
         <img alt="mine_img" src={PERMIT} />
         <h3>{String.NO_SECURITIES}</h3>
+      </div>
+    )}
+    {props.type === "risk-rating" && (
+      <div>
+        <img alt="mine_img" src={NO_MINE} />
+        <h3>No risk rating surveys have been completed</h3>
       </div>
     )}
   </div>
