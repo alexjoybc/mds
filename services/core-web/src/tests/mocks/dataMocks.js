@@ -3371,6 +3371,14 @@ export const BULK_STATIC_CONTENT_RESPONSE = {
     { mine_report_submission_status_code: "REC", description: "Changes Received" },
     { mine_report_submission_status_code: "ACC", description: "Accepted" },
   ],
+  mineRiskRatingSurveyDefinitionOptions: [
+    {
+      mine_risk_rating_survey_definition_id: 1,
+      create_timestamp: "2020-04-28T20:32:05.351257+00:00",
+      survey_definition_json: "{}",
+      is_active_survey: true,
+    },
+  ],
   mineReportCategoryOptions: [
     { mine_report_category: "H&S", description: "Health and Safety" },
     { mine_report_category: "GSE", description: "Geoscience and Environmental" },

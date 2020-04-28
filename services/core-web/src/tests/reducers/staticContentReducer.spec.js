@@ -24,6 +24,7 @@ const baseExpectedValue = {
   mineReportCategoryOptions: [],
   mineReportDefinitionOptions: [],
   mineReportStatusOptions: [],
+  mineRiskRatingSurveyDefinitionOptions: [],
   noticeOfWorkActivityTypeOptions: [],
   noticeOfWorkUnitTypeOptions: [],
   noticeOfWorkApplicationTypeOptions: [],

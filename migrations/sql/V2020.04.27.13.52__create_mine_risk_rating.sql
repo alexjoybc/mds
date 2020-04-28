@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS  mine_risk_rating_survey_response(
     FOREIGN KEY (mine_guid) REFERENCES mine(mine_guid)
 );
 
+-- WIP risk survey
 INSERT INTO mine_risk_rating_survey_definition (
     survey_definition_json,
     is_active_survey
@@ -77,6 +78,7 @@ VALUES
 ]', true)
 ON CONFLICT DO NOTHING;
 
+-- WIP risk survey
 INSERT INTO mine_risk_rating_survey_definition (
     survey_definition_json,
     is_active_survey
