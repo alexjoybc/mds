@@ -1,29 +1,27 @@
-/* eslint-disable */
-
 import React from "react";
 import PropTypes from "prop-types";
 import { Field, reduxForm, focus } from "redux-form";
-
 import { Form, Button, Col, Row, Popconfirm } from "antd";
 import { resetForm } from "@common/utils/helpers";
 import { renderConfig } from "@/components/common/config";
 import * as FORM from "@/constants/forms";
 import { getGenerateDocumentFormField } from "@/components/common/GenerateDocumentFormField";
+import CustomPropTypes from "@/customPropTypes";
 
 const propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  mineRiskRatingSurveyDefinition: PropTypes.objectOf(PropTypes.any),
-  mineRiskRatingSurveyResponse: PropTypes.objectOf(PropTypes.any),
+  mineRiskRatingSurveyDefinition: CustomPropTypes.mineRiskRatingSurveyDefinition.isRequired,
   isViewOnly: PropTypes.bool.isRequired,
 };
 
-export const MineRiskRatingForm = (props) => {
+export const MineRiskRatingSurveyForm = (props) => {
   const createSurvey = (mineRiskRatingSurveyDefinition) => {
     const fields = JSON.parse(mineRiskRatingSurveyDefinition.survey_definition_json);
 
     if (props.isViewOnly) {
+      // eslint-disable-next-line no-return-assign
       fields.forEach((field) => (field.disabled = true));
     }
 
@@ -90,7 +88,7 @@ export const MineRiskRatingForm = (props) => {
   );
 };
 
-MineRiskRatingForm.propTypes = propTypes;
+MineRiskRatingSurveyForm.propTypes = propTypes;
 
 export default reduxForm({
   form: FORM.MINE_RISK_RATING_SURVEY,
@@ -98,4 +96,4 @@ export default reduxForm({
   onSubmitSuccess: resetForm(FORM.MINE_RISK_RATING_SURVEY),
   onSubmitFail: (errors, dispatch) =>
     dispatch(focus(FORM.MINE_RISK_RATING_SURVEY, Object.keys(errors)[0])),
-})(MineRiskRatingForm);
+})(MineRiskRatingSurveyForm);

@@ -60,3 +60,21 @@ export const mineVerificationStatus = shape({
   verifying_user: PropTypes.string.isRequired,
   verifying_timestamp: PropTypes.string.isRequired,
 });
+
+export const mineRiskRatingSurveyDefinition = shape({
+  mine_risk_rating_survey_definition_id: PropTypes.number.isRequired,
+  survey_definition_json: PropTypes.string.isRequired,
+  is_active_survey: PropTypes.bool.isRequired,
+  create_timestamp: PropTypes.string.isRequired,
+});
+
+export const mineRiskRatingSurveyResponse = shape({
+  mine_risk_rating_survey_response_id: PropTypes.number.isRequired,
+  mine_risk_rating_survey_definition_id: PropTypes.number.isRequired,
+  mine_guid: PropTypes.string.isRequired,
+  survey_response_json: PropTypes.string.isRequired,
+  notes: PropTypes.string,
+  rating: PropTypes.number.isRequired,
+  username: PropTypes.string.isRequired,
+  create_timestamp: PropTypes.string.isRequired,
+});

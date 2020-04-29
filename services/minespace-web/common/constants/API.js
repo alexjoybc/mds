@@ -10,6 +10,9 @@ export const MINE_LIST_QUERY = (params) => `/mines${params}`;
 export const PARTIES_LIST_QUERY = (params = {}) => `/parties?${queryString.stringify(params)}`;
 export const MINE_MAP_LIST = "/mines/map-list";
 export const MINE_BASIC_INFO_LIST = `/mines/basicinfo`;
+export const MINE_RISK_RATING_SURVEY_RESPONSES_MINE = (mineGuid) =>
+  `/mines/risk-rating-survey-responses/${mineGuid}`;
+export const MINE_RISK_RATING_SURVEY_RESPONSES = `/mines/risk-rating-survey-responses`;
 export const PARTY = "/parties";
 export const MANAGER = "/parties/managers";
 export const PARTY_RELATIONSHIP = "/parties/mines";

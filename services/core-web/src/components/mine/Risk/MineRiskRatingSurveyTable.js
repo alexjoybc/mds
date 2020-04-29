@@ -1,16 +1,16 @@
 import React from "react";
 import { Button, Icon } from "antd";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { formatDate } from "@common/utils/helpers";
+import { formatDate, dateSorter, nullableStringSorter } from "@common/utils/helpers";
 import * as Strings from "@common/constants/strings";
 import NullScreen from "@/components/common/NullScreen";
 import CoreTable from "@/components/common/CoreTable";
+import CustomPropTypes from "@/customPropTypes";
 
 const propTypes = {
-  mineRiskRatingSurveyResponses: PropTypes.objectOf(PropTypes.any),
   openViewMineRiskRatingSurveyResponseModal: PropTypes.func.isRequired,
   isLoaded: PropTypes.bool.isRequired,
+  mineRiskRatingSurveyResponses: PropTypes.arrayOf(CustomPropTypes.mineRiskRatingSurveyResponse),
 };
 
 const defaultProps = { mineRiskRatingSurveyResponses: [] };
@@ -28,14 +28,14 @@ const columns = [
     dataIndex: "username",
     key: "username",
     render: (text) => <div title="Username">{text}</div>,
-    sorter: (a, b) => a.username.localeCompare(b.username),
+    sorter: nullableStringSorter("username"),
   },
   {
     title: "Date Completed",
     dataIndex: "create_timestamp",
     key: "create_timestamp",
     render: (text) => <div title="Date Completed">{text}</div>,
-    sorter: (a, b) => a.create_timestamp.localeCompare(b.create_timestamp),
+    sorter: dateSorter("create_timestamp"),
   },
   {
     key: "operations",
@@ -70,7 +70,7 @@ const transformRowData = (response, openViewMineRiskRatingSurveyResponseModal) =
   };
 };
 
-export const MineRiskRatingTable = (props) => {
+export const MineRiskRatingSurveyTable = (props) => {
   const rowData = props.mineRiskRatingSurveyResponses.map((response) =>
     transformRowData(response, props.openViewMineRiskRatingSurveyResponseModal)
   );
@@ -91,9 +91,7 @@ export const MineRiskRatingTable = (props) => {
   );
 };
 
-const mapStateToProps = () => ({});
+MineRiskRatingSurveyTable.propTypes = propTypes;
+MineRiskRatingSurveyTable.defaultProps = defaultProps;
 
-MineRiskRatingTable.propTypes = propTypes;
-MineRiskRatingTable.defaultProps = defaultProps;
-
-export default connect(mapStateToProps)(MineRiskRatingTable);
+export default MineRiskRatingSurveyTable;

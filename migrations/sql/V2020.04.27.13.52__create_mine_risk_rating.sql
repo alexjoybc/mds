@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS  mine_risk_rating_survey_response(
     FOREIGN KEY (mine_guid) REFERENCES mine(mine_guid)
 );
 
--- WIP risk survey
+-- WIP/temporary risk rating survey questions from Aaron #1
 INSERT INTO mine_risk_rating_survey_definition (
     survey_definition_json,
     is_active_survey
@@ -78,7 +78,7 @@ VALUES
 ]', true)
 ON CONFLICT DO NOTHING;
 
--- WIP risk survey
+-- WIP/temporary risk rating survey questions from Aaron #2
 INSERT INTO mine_risk_rating_survey_definition (
     survey_definition_json,
     is_active_survey
@@ -94,7 +94,7 @@ VALUES
   },
   {
     "id": "q2",
-    "label": "What is the level of risk based on different types of site activities (e.g. blasting, drilling)?",
+    "label": "What is the level of risk based on different types of site activities (e.g., blasting, drilling)?",
     "type": "SLIDER_1_TO_10",
     "required": true
   },
@@ -118,9 +118,9 @@ VALUES
   },
   {
     "id": "q6",
-    "label": " What “delegation level” was required to sign the permit? This is sometimes used as a proxy for ‘complexity’ or ‘level of risk profile’",
+    "label": "What \"delegation level\" was required to sign the permit? This is sometimes used as a proxy for \'complexity\' or \'level of risk profile\'",
     "type": "SLIDER_1_TO_10",
     "required": true
   }
-]', true)
+]', false)
 ON CONFLICT DO NOTHING;

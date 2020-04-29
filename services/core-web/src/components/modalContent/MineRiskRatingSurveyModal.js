@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { formatDate } from "@common/utils/helpers";
 import { Col, Row, Descriptions, Divider } from "antd";
 import { getMineRiskRatingSurveyDefinitionOptionsHash } from "@common/selectors/staticContentSelectors";
-// import CustomPropTypes from "@/customPropTypes";
-import MineRiskRatingForm from "@/components/Forms/MineRiskRatingForm";
+import CustomPropTypes from "@/customPropTypes";
+import MineRiskRatingSurveyForm from "@/components/Forms/MineRiskRatingSurveyForm";
 
 const propTypes = {
   onSubmit: PropTypes.func.isRequired,
@@ -13,7 +13,7 @@ const propTypes = {
   title: PropTypes.string.isRequired,
   mineGuid: PropTypes.string.isRequired,
   mineRiskRatingSurveyDefinitionOptionsHash: PropTypes.objectOf(PropTypes.any).isRequired,
-  mineRiskRatingSurveyResponse: PropTypes.objectOf(PropTypes.any),
+  mineRiskRatingSurveyResponse: CustomPropTypes.mineRiskRatingSurveyResponse,
   isViewOnly: PropTypes.bool,
 };
 
@@ -78,7 +78,7 @@ export const MineRiskRatingSurveyModal = (props) => {
       </Row>
       <Row type="flex" justify="center" align="middle">
         <Col>
-          <MineRiskRatingForm
+          <MineRiskRatingSurveyForm
             onSubmit={handleModalSubmit}
             closeModal={props.closeModal}
             title={props.title}

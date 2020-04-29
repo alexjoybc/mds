@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { sum } from "lodash";
@@ -19,23 +17,30 @@ import {
 } from "@common/actionCreators/mineActionCreator";
 import { modalConfig } from "@/components/modalContent/config";
 import CustomPropTypes from "@/customPropTypes";
-import MineRiskRatingTable from "@/components/mine/Risk/MineRiskRatingTable";
+import MineRiskRatingTable from "@/components/mine/Risk/MineRiskRatingSurveyTable";
 import AuthorizationWrapper from "@/components/common/wrappers/AuthorizationWrapper";
 import * as Permission from "@/constants/permissions";
 
 const propTypes = {
   mines: PropTypes.objectOf(CustomPropTypes.mine).isRequired,
   mineGuid: PropTypes.string.isRequired,
-  mineRiskRatingSurveyResponses: PropTypes.arrayOf(PropTypes.any),
   closeModal: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
+  fetchMineRiskRatingSurveyResponses: PropTypes.func.isRequired,
+  createMineRiskRatingSurveyResponse: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: {
+      id: PropTypes.string,
+    },
+  }).isRequired,
+  mineRiskRatingSurveyResponses: PropTypes.arrayOf(CustomPropTypes.mineRiskRatingSurveyResponse),
 };
 
 const defaultProps = {
   mineRiskRatingSurveyResponses: [],
 };
 
-export class MineRiskRatingInfo extends Component {
+export class MineRiskRatingSurveyInfo extends Component {
   state = {
     isLoaded: false,
   };
@@ -48,16 +53,20 @@ export class MineRiskRatingInfo extends Component {
   };
 
   handleCompleteMineRiskRatingSurveyResponse = (values, mineRiskRatingSurveyDefinitionId) => {
-    const { notes } = values;
-    delete values.notes;
-    const fieldValues = Object.values(values);
-    // NOTE: Temporary " - 1" in calculation due to notes field.
-    const rating = (sum(fieldValues) / (fieldValues.length * 10)) * 100;
-    console.log("ratnoig", rating);
+    const surveyResponse = values;
+
+    const { notes } = surveyResponse;
+    delete surveyResponse.notes;
+
+    const surveyResponseValues = Object.values(surveyResponse);
+
+    // TODO: Rating should be calculated in the backend.
+    const rating = (sum(surveyResponseValues) / (surveyResponseValues.length * 10)) * 100;
+
     const payload = {
       mine_risk_rating_survey_definition_id: mineRiskRatingSurveyDefinitionId,
       mine_guid: this.props.mineGuid,
-      survey_response_json: JSON.stringify(values),
+      survey_response_json: JSON.stringify(surveyResponse),
       notes,
       username: "",
       rating,
@@ -97,6 +106,7 @@ export class MineRiskRatingInfo extends Component {
         mineGuid: mine.mine_guid,
         isViewOnly: true,
       },
+      isViewOnly: true,
       width: "50vw",
       content: modalConfig.MINE_RISK_RATING_SURVEY,
     });
@@ -147,8 +157,8 @@ export class MineRiskRatingInfo extends Component {
   }
 }
 
-MineRiskRatingInfo.propTypes = propTypes;
-MineRiskRatingInfo.defaultProps = defaultProps;
+MineRiskRatingSurveyInfo.propTypes = propTypes;
+MineRiskRatingSurveyInfo.defaultProps = defaultProps;
 
 const mapStateToProps = (state) => ({
   mines: getMines(state),
@@ -167,4 +177,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(MineRiskRatingInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(MineRiskRatingSurveyInfo);
