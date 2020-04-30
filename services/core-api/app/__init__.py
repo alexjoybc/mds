@@ -27,6 +27,7 @@ from app.api.document_generation.namespace import api as doc_gen_api
 from app.api.securities.namespace import api as securities_api
 from app.api.verify.namespace import api as verify_api
 from app.api.core_activity.namespace import api as core_activity_api
+from app.api.notifications.namespace import api as notification_api
 
 from app.commands import register_commands
 from app.config import Config
@@ -78,12 +79,12 @@ def register_extensions(app):
 
     CORS(app)
 
-    @app.before_request
-    def user_auth():
-        if request.method != 'OPTIONS': 
-            from app import auth
-            core_user = auth.get_core_user()
-        
+    # @app.before_request
+    # def user_auth():
+    #     if request.method != 'OPTIONS':
+    #         from app import auth
+    #         core_user = auth.get_core_user()
+
     return None
 
 
@@ -107,6 +108,7 @@ def register_routes(app):
     api.add_namespace(securities_api)
     api.add_namespace(verify_api)
     api.add_namespace(core_activity_api)
+    api.add_namespace(notification_api)
 
     # Healthcheck endpoint
     @api.route('/health')

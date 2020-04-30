@@ -9,10 +9,14 @@ from app.api.utils.resources_mixins import UserMixin
 from app.api.utils.core_activity_engine import CoreActivityEngine
 from app.api.core_activity.response_models import CORE_ACTIVITY
 
+
 class CoreActivityListResource(Resource, UserMixin):
-    @api.doc(description='Get Core Activities',
-        params={'published_since': 'Activities that have been published since this date',
-        'published_before': 'Activities that have been published before this date'})
+    @api.doc(
+        description='Get Core Activities',
+        params={
+            'published_since': 'Activities that have been published since this date',
+            'published_before': 'Activities that have been published before this date'
+        })
     #@requires_role_view_all
     @api.marshal_with(CORE_ACTIVITY, envelope='records', code=200)
     def get(self):
