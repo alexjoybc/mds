@@ -118,7 +118,7 @@ VALUES
   },
   {
     "id": "q6",
-    "label": "What \"delegation level\" was required to sign the permit? This is sometimes used as a proxy for \'complexity\' or \'level of risk profile\'",
+    "label": "What \"delegation level\" was required to sign the permit? This is sometimes used as a proxy for \"complexity\" or \"level of risk profile\"",
     "type": "SLIDER_1_TO_10",
     "required": true
   }

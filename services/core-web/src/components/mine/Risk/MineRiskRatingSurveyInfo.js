@@ -123,7 +123,7 @@ export class MineRiskRatingSurveyInfo extends Component {
             The below table displays all of the completed risk rating surveys for this mine. To
             complete a risk rating survey, click the Complete Risk Rating Survey button. A mine is
             considered to have a high risk rating if its rating is close to 100 and has a low risk
-            ratiing if its value is close to 0.
+            rating if its rating is close to 0.
           </p>
           <Divider />
         </div>
